@@ -68,10 +68,11 @@ appropriately, run as usual by:
 To apply the patches, build the container with "LMS_PATCHES=y".
 
 * `lms-musicmagic-host.patch`: this adds a configuration setting
-  MMShost so you can run MusicIP a machine other than `localhost`.  This
-  allows the container to be run without the intrusive net=host
+  MMShost so you can run MusicIP on a machine other than `localhost`.  This
+  allows the container to be run without the intrusive `net=host`
   setting.  Notice that only the included server plugins are
-  patched, others unfortunately also hardware `localhost`.
+  patched, some others unfortunately also hardwire `localhost` as
+  the MusicIP host.
 
 
 ### Pointers
