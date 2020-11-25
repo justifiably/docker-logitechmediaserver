@@ -3,15 +3,15 @@ FROM buildpack-deps:buster-curl
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Env variables persisted in container
-ARG LMS_PATCHES=Y
+# ARG LMS_PATCHES=Y
 ENV LMS_PATCHES=$LMS_PATCHES
 ARG PUID=819
 ARG PGID=819
 ENV PUID $PUID
 ENV PGID $PGID
 
-# 7.9.2 final release, 14th Jan 2020.
-ARG LMSDEB=http://downloads.slimdevices.com/LogitechMediaServer_v7.9.2/logitechmediaserver_7.9.2_all.deb
+# 8.0.0 stable release, 22nd Nov 2020.
+ARG LMSDEB=http://downloads.slimdevices.com/LogitechMediaServer_v8.0.0/logitechmediaserver_8.0.0_all.deb
 
 RUN echo "deb http://www.deb-multimedia.org buster main non-free" | tee -a /etc/apt/sources.list && \
     apt-get update -o Acquire::AllowInsecureRepositories=true && apt-get install -y --allow-unauthenticated deb-multimedia-keyring && \
@@ -47,8 +47,8 @@ RUN echo "$LOCALE UTF-8" > /etc/locale.gen && \
     
 COPY lms-setup.sh startup.sh *.patch /
 
-# Apply our patches if LMS_PATCHES=y
-RUN if [ -n "$LMS_PATCHES" ]; then cd /usr/share/perl5; for f in /*.patch; do patch -p1 < "$f"; done; fi
+# Apply our patches if LMS_PATCHES is set
+RUN if [ -n "$LMS_PATCHES" ]; then cd /usr/share/perl5; for f in /*.patch; do patch -p1 -F12 < "$f"; done; fi
 
 VOLUME ["/mnt/state","/mnt/music","/mnt/playlists"]
 
