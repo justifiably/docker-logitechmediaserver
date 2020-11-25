@@ -1,5 +1,8 @@
 # Docker Container for Logitech Media Server
 
+> **Please note:** there is now an official 
+> [LMS community supported Docker image here](https://hub.docker.com/r/lmscommunity/logitechmediaserver).  I encourage you to switch to using that one.
+
 Docker image for
 [Logitech Media Server](https://github.com/Logitech/slimserver) (aka
 SqueezeCenter, SqueezeboxServer, SlimServer).
